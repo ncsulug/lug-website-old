@@ -1,0 +1,36 @@
+{% load static from staticfiles %}
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="brand" href="/">
+                <img src="{% static "img/Tux-simple.svg" %}" class="logo" style="height: 70px;">
+                LUG @ NC State
+            </a>
+            <ul class="nav">
+                <li><a>Blog</a></li>
+                <li><a>IRC</a></li>
+            </ul>
+            <ul class="nav pull-right">
+                <li class="dropdown">
+                    {% if user.is_authenticated %}
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        leafstorm <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a>My Profile</a></li>
+                        <li><a>Log Out</a></li>
+                    </ul>
+                    {% else %}
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        (not logged in) <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a>Log In</a></li>
+                        <li><a>Register</a></li>
+                    </ul>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

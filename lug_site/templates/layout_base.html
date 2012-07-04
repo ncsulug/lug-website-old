@@ -1,0 +1,36 @@
+<!doctype html>
+{% load static from staticfiles %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>LUG @ NC State: {% block title %}{% endblock title %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        {% block styles %}
+        <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+        {% endblock styles %}
+    </head>
+
+    <body class="with-navbar">
+        {% include "site/navbar.html" %}
+
+        <div class="container container-main">
+            {% block body %}
+            {% endblock body %}
+
+            <hr>
+
+            <footer class="row">
+                {% include "site/footer.html" %}
+            </footer>
+        </div>
+
+        {% block scripts %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script src="{% static "js/bootstrap-dropdown.js" %}"></script>
+        {% endblock scripts %}
+    </body>
+</html>
