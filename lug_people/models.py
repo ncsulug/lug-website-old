@@ -24,13 +24,13 @@ class MemberProfile(models.Model):
     # Names
     nickname        = models.CharField("nickname", max_length=32,
                         help_text="IRC nickname, or other kind of online handle.")
-    real_name       = models.CharField("real name", max_length=64, null=True,
+    real_name       = models.CharField("real name", max_length=64, blank=True,
                         help_text="The name you use in person.")
     preferred_name  = models.CharField("preferred name", max_length=4,
                         choices=PREFERRED_NAME_CHOICES, default=u"nick",
                         help_text="Which name you would prefer the site to use.")
     # LUG-related organizational info
-    title           = models.CharField("title", max_length=64, null=True,
+    title           = models.CharField("title", max_length=64, blank=True,
                         help_text="Official LUG title, as officer or "
                                   "committee chair.")
     role            = models.CharField("role", max_length=8,
@@ -44,28 +44,28 @@ class MemberProfile(models.Model):
 
     @property
     def name(self):
-        if self.real_name is None or self.preferred_name == u"nick":
+        if not self.real_name or self.preferred_name == u"nick":
             return self.nickname
         else:
             return self.real_name
 
     @property
     def alternate_name(self):
-        if self.real_name is None or self.preferred_name == u"nick":
+        if not self.real_name or self.preferred_name == u"nick":
             return self.real_name
         else:
             return self.nickname
 
     @property
     def names(self):
-        if self.real_name is None or self.preferred_name == u"nick":
+        if not self.real_name or self.preferred_name == u"nick":
             return (self.nickname, self.real_name)
         else:
             return (self.real_name, self.nickname)
 
     @property
     def has_both_names(self):
-        return self.real_name is not None
+        return bool(self.real_name)
 
     @property
     def email(self):
@@ -96,7 +96,8 @@ class BitType(models.Model):
     instructions    = models.CharField("instructions", max_length=128,
                         help_text="Instructions to display for entering bits "
                                   "of this type.")
-    link_template   = models.CharField("link template", max_length=240, null=True,
+    link_template   = models.CharField("link template", max_length=240,
+                        blank=True,
                         help_text="A template for turning data of this type "
                                   "into a link. Include %s where it should "
                                   "be substituted in. Obviously useless for "
@@ -109,7 +110,7 @@ class BitType(models.Model):
         return u"%s (%s)" % (self.caption, self.slug)
 
 
-username_validator = validators.RegexValidator("^[a-zA-Z0-9_.-]$",
+username_validator = validators.RegexValidator("^[a-zA-Z0-9_.-]+$",
                         u"The data must be a username (if this is "
                         "your actual username, contact leafstorm so he can "
                         "fix the regex).")
@@ -125,7 +126,7 @@ class Bit(models.Model):
         ordering    = ('bit_type__ordering', 'bit_type__caption')
 
     def __unicode__(self):
-        return u"%s: %r" % (self.bit_type.caption, self.data)
+        return u"%s: [%s]" % (self.bit_type.caption, self.data)
 
     def clean(self):
         format = self.bit_type.format
