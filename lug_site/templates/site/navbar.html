@@ -14,11 +14,15 @@
                 <li class="dropdown">
                     {% if user.is_authenticated %}
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        leafstorm <b class="caret"></b>
+                        {{ user.name }} <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a>My Profile</a></li>
                         <li><a>Log Out</a></li>
+                        {% if user.is_staff %}
+                        <li class="divider"></li>
+                        <li><a href="{% url admin:index %}">Site Admin</a></li>
+                        {% endif %}
                     </ul>
                     {% else %}
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
