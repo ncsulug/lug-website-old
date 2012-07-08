@@ -18,6 +18,12 @@
         {% include "site/navbar.html" %}
 
         <div class="container container-main">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+            {% endif %}
+
             {% block body %}
             {% endblock body %}
 

@@ -125,9 +125,24 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    # Helper apps
     'south',
+    'gravatar',
+    'bootstrap_toolkit',
+    # Actual project apps
     'lug_people',
 )
+
+# This is for Bootstrap
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.DEBUG:     'alert-debug',
+    messages.INFO:      'alert-info',
+    messages.SUCCESS:   'alert-success',
+    messages.WARNING:   'alert-warning',
+    messages.ERROR:     'alert-error'
+}
 
 AUTH_PROFILE_MODULE = 'lug_people.MemberProfile'
 

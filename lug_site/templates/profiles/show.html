@@ -1,0 +1,49 @@
+{% extends "layout_base.html" %}
+
+{% block title %}{{ profile }}{% endblock title %}
+
+{% block body %}
+
+   <h1 class="page-header">
+        {{ profile.name }}
+        {% if profile.has_both_names %}
+        ({{ profile.alternate_name }})
+        {% endif %}
+        {% if profile.title %}
+        <small>{{ profile.title }}</small>
+        {% endif %}
+        {% if profile.user == user %}
+        <a href="{% url profile_edit %}" class="btn btn-primary" style="float: right;">
+            <i class="icon-pencil icon-white"></i> Edit Profile
+        </a>
+        {% endif %}
+    </h1>
+
+    <div class="row">
+        <div class="span6 profile-bio">
+            <h2>Biography</h2>
+
+            {% if profile.biography %}
+            {{ profile.biography }}
+            {% else %}
+            <p>
+                ({{ profile.name }} hasn't written a biography yet.)
+            </p>
+            {% endif %}
+        </div>
+
+        <div class="span6 profile-bits">
+            <h2>More Information</h2>
+
+            <dl class="dl-horizontal">
+                <dt>Role:</dt>
+                <dd>{{ profile.get_role_display }}</dd>
+                {% for bit in profile.all_bits %}
+                <dt>{{ bit.bit_type.caption }}:</dt>
+                <dd>{{ bit.data_html }}</dd>
+                {% endfor %}
+            </dl>
+        </div>
+    </div>
+
+{% endblock body %}

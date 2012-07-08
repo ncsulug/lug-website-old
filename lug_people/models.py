@@ -42,6 +42,7 @@ class MemberProfile(models.Model):
     def __unicode__(self):
         return u"%s (%s)" % self.names if self.has_both_names else self.name
 
+    # Name-related properties
     @property
     def name(self):
         if not self.real_name or self.preferred_name == u"nick":
@@ -66,6 +67,18 @@ class MemberProfile(models.Model):
     @property
     def has_both_names(self):
         return bool(self.real_name)
+
+    # Bits!
+    def all_bits(self):
+        return self.bit_set.all()
+
+    def bits_as_dict(self):
+        return dict((bit.slug, bit.data) for bit in self.all_bits())
+
+    # Authentication-related properties
+    @property
+    def username(self):
+        return self.user.username
 
     @property
     def email(self):
@@ -107,7 +120,7 @@ class BitType(models.Model):
         ordering    = ('ordering', 'caption')
 
     def __unicode__(self):
-        return u"%s (%s)" % (self.caption, self.slug)
+        return self.caption
 
 
 username_validator = validators.RegexValidator("^[a-zA-Z0-9_.-]+$",
@@ -134,6 +147,14 @@ class Bit(models.Model):
             url_validator(self.data)
         elif format == u"username":
             username_validator(self.data)
+
+    @property
+    def caption(self):
+        return self.bit_type.caption
+
+    @property
+    def slug(self):
+        return self.bit_type.slug
 
     @property
     def data_url(self):

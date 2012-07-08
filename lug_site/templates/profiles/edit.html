@@ -1,0 +1,78 @@
+{% extends "layout_base.html" %}
+{% load bootstrap_toolkit %}
+
+{% block title %}Edit Profile{% endblock title %}
+
+{% block body %}
+
+   <h1 class="page-header">
+        {{ profile.name }}
+        {% if profile.has_both_names %}
+        ({{ profile.alternate_name }})
+        {% endif %}
+        {% if profile.title %}
+        <small>{{ profile.title }}</small>
+        {% endif %}
+        <a href="{% url profile profile.username %}" class="btn btn-primary" style="float: right;">
+            <i class="icon-arrow-left icon-white"></i> Back to Profile
+        </a>
+    </h1>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="span6 profile-bio">
+                <h2>Basic Information</h2>
+
+                {{ form|as_bootstrap }}
+            </div>
+
+            <div class="span6 profile-bits">
+                <h2>Bits</h2>
+
+                {{ bit_forms.management_form|as_bootstrap }}
+                {% if bit_forms.non_field_errors %}
+                    {% include "bootstrap_toolkit/non_field_errors.html" with form=bit_forms %}
+                {% endif %}
+
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th colspan="2">Data</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for bit_form in bit_forms.forms %}
+                        <tr>
+                            <td class="control-group{% if bit_form.bit_type.errors %} error{% endif %}">
+                                {{ bit_form.bit_type }}
+                                {% include "bootstrap_toolkit/field_errors.html" with field=bit_form.bit_type inline=False %}
+                            </td>
+                            <td class="control-group{% if bit_form.data.errors %} error{% endif %}">
+                                {{ bit_form.data }}
+                                {% include "bootstrap_toolkit/field_errors.html" with field=bit_form.data inline=False %}
+                            </td>
+                            <td style="white-space: nowrap;">
+                                {{ bit_form.id }}
+                                {{ bit_form.owner }}
+                                <label for="{{ bit_form.DELETE.auto_id }}">
+                                    {{ bit_form.DELETE }}
+                                    <i class="icon-trash"></i>
+                                </label>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row">
+                <div class="span12 form-actions">
+                    <button class="btn btn-success" type="submit">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+{% endblock body %}
