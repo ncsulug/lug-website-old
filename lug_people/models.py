@@ -1,25 +1,30 @@
+import re
 from django.db import models
 from django.contrib.auth.models import User
 from django.core import validators
 from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
 from django.utils.html import escape
+from django.utils import timezone
 import urllib
 
-PREFERRED_NAME_CHOICES = (
-    (u"nick",   u"Nickname"),
-    (u"real",   u"Real Name"),
-)
+NON_USERNAME_CHARS = re.compile(r'[^\w@+.-]+')
 
-ROLE_CHOICES = (
-    (u"student",    u"Student"),
-    (u"alumnus",    u"Alumnus"),
-    (u"faculty",    u"Faculty"),
-    (u"staff",      u"Staff"),
-    (u"visitor",    u"Visitor")
-)
 
 class MemberProfile(models.Model):
+    PREFERRED_NAME_CHOICES = (
+        (u"nick",   u"Nickname"),
+        (u"real",   u"Real Name"),
+    )
+
+    ROLE_CHOICES = (
+        (u"student",    u"Student"),
+        (u"alumnus",    u"Alumnus"),
+        (u"faculty",    u"Faculty"),
+        (u"staff",      u"Staff"),
+        (u"visitor",    u"Visitor")
+    )
+
     user            = models.OneToOneField(User, verbose_name="user")
     # Names
     nickname        = models.CharField("nickname", max_length=32,
@@ -41,6 +46,10 @@ class MemberProfile(models.Model):
 
     def __unicode__(self):
         return u"%s (%s)" % self.names if self.has_both_names else self.name
+
+    @staticmethod
+    def make_username(nickname):
+        return NON_USERNAME_CHARS.sub('', nickname.lower())
 
     # Name-related properties
     @property
@@ -83,6 +92,43 @@ class MemberProfile(models.Model):
     @property
     def email(self):
         return self.user.email
+
+
+class AccountRequest(models.Model):
+    STATUS_CHOICES = (
+        (u"pending",    u"Pending"),
+        (u"deferred",   u"Deferred"),
+        (u"approved",   u"Approved")
+    )
+
+    user            = models.OneToOneField(User, verbose_name="user")
+    request_date    = models.DateTimeField("request date",
+                        default=timezone.now,
+                        help_text="The date the user made the request.")
+    status          = models.CharField("status", max_length=8,
+                        choices=STATUS_CHOICES, default=u"pending",
+                        help_text="The current status of the request.")
+    comments        = models.TextField("comments",
+                        help_text="Comments explaining who you are.")
+
+    @property
+    def names(self):
+        return self.user.get_profile().names
+
+    @property
+    def username(self):
+        return self.user.username
+
+    def approve(self):
+        self.user.is_active = True
+        self.user.save()
+        self.status = u"approved"
+        self.save()
+
+    def destroy(self):
+        self.user.get_profile().delete()
+        self.user.delete()
+        self.delete()
 
 
 class BitType(models.Model):

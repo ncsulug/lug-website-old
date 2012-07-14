@@ -1,12 +1,17 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.auth import views as auth_views
-from .views import ProfileView, ProfileEditView
+from .views import ProfileView, ProfileEditView, RegisterView
 
 account_patterns = patterns('',
     # Edit Profile
     url(r'^edit-profile/$',
         ProfileEditView.as_view(template_name='profiles/edit.html'),
         name='profile_edit'),
+
+    # Registration
+    url(r'register/$',
+        RegisterView.as_view(template_name='accounts/register.html'),
+        name='accounts_register'),
 
     # Login, Logout
     url(r'^login/$',

@@ -1,0 +1,46 @@
+{% extends "layout_base.html" %}
+{% load bootstrap_toolkit %}
+
+{% block title %}Register{% endblock title %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="span6">
+            <h1>Register</h1>
+
+            <form action="" method="POST">
+                {% csrf_token %}
+
+                {{ form.email|as_bootstrap }}
+
+                {{ form.nickname|as_bootstrap }}
+
+                {{ form.real_name|as_bootstrap }}
+
+                {{ form.preferred_name|as_bootstrap }}
+
+                {{ form.password1|as_bootstrap }}
+
+                {{ form.password2|as_bootstrap }}
+
+                {{ form.role|as_bootstrap }}
+
+                {{ form.comments|as_bootstrap }}
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        Register
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="span6">
+            {% include "copy/rules.html" %}
+            {% include "copy/registration-info.html" %}
+            {% include "copy/password-advice.html" %}
+        </div>
+    </div>
+
+{% endblock body %}
