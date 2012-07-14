@@ -740,6 +740,11 @@ code,pre,pre.prettyprint,.well{background-color:#eeeeee;}
 .hero-unit{-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);-moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);border:1px solid rgba(0, 0, 0, 0.05);-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
 .table-bordered,.well,.prettyprint{-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
 body.with-navbar{padding-top:90px;}
+.gravatar{border:1px solid #eeeeee;padding:2px;vertical-align:middle;}
+table.form-grid td select,table.form-grid td textarea,table.form-grid td input[type="text"],table.form-grid td input[type="password"],table.form-grid td input[type="datetime"],table.form-grid td input[type="datetime-local"],table.form-grid td input[type="date"],table.form-grid td input[type="month"],table.form-grid td input[type="time"],table.form-grid td input[type="week"],table.form-grid td input[type="number"],table.form-grid td input[type="email"],table.form-grid td input[type="url"],table.form-grid td input[type="search"],table.form-grid td input[type="tel"],table.form-grid td input[type="color"],table.form-grid td .uneditable-input{margin:0;}
+table.form-grid td .help-block{margin-top:9px;margin-bottom:0;}
+table.form-grid td.symbolic-checkbox{vertical-align:middle;white-space:nowrap;}
+.profile-header{font-weight:normal;}
 .license-logo{display:block;float:left;margin:auto 0.5em auto 0;height:100%;}
 .pull-right{float:right;}
 .pull-left{float:left;}

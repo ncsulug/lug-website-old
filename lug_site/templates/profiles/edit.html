@@ -1,17 +1,16 @@
 {% extends "layout_base.html" %}
 {% load bootstrap_toolkit %}
+{% load gravatar %}
 
 {% block title %}Edit Profile{% endblock title %}
 
 {% block body %}
 
-   <h1 class="page-header">
-        {{ profile.name }}
+   <h1 class="page-header profile-header">
+        <img class="gravatar" alt="{{ profile.name }}'s avatar" src="{% gravatar_for_email profile.email 40 %}">
+        <strong>{{ profile.name }}</strong>
         {% if profile.has_both_names %}
         ({{ profile.alternate_name }})
-        {% endif %}
-        {% if profile.title %}
-        <small>{{ profile.title }}</small>
         {% endif %}
         <a href="{% url profile profile.username %}" class="btn btn-primary" style="float: right;">
             <i class="icon-arrow-left icon-white"></i> Back to Profile
@@ -21,13 +20,13 @@
     <form action="" method="POST">
         {% csrf_token %}
         <div class="row">
-            <div class="span6 profile-bio">
+            <div class="span5 profile-bio">
                 <h2>Basic Information</h2>
 
                 {{ form|as_bootstrap }}
             </div>
 
-            <div class="span6 profile-bits">
+            <div class="span7 profile-bits">
                 <h2>Bits</h2>
 
                 {{ bit_forms.management_form|as_bootstrap }}
@@ -35,7 +34,7 @@
                     {% include "bootstrap_toolkit/non_field_errors.html" with form=bit_forms %}
                 {% endif %}
 
-                <table class="table table-condensed">
+                <table class="table form-grid">
                     <thead>
                         <tr>
                             <th>Type</th>
@@ -53,7 +52,7 @@
                                 {{ bit_form.data }}
                                 {% include "bootstrap_toolkit/field_errors.html" with field=bit_form.data inline=False %}
                             </td>
-                            <td style="white-space: nowrap;">
+                            <td class="symbolic-checkbox">
                                 {{ bit_form.id }}
                                 {{ bit_form.owner }}
                                 <label for="{{ bit_form.DELETE.auto_id }}">
@@ -66,10 +65,15 @@
                     </tbody>
                 </table>
             </div>
+        </div>
 
-            <div class="row">
-                <div class="span12 form-actions">
-                    <button class="btn btn-success" type="submit">Save</button>
+        <div class="row">
+            <div class="span12">
+                <div class="form-actions">
+                    <button class="btn btn-success" type="submit">
+                        <i class="icon-ok icon-white"></i>
+                        Save Profile
+                    </button>
                 </div>
             </div>
         </div>

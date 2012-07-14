@@ -1,16 +1,15 @@
 {% extends "layout_base.html" %}
+{% load gravatar %}
 
 {% block title %}{{ profile }}{% endblock title %}
 
 {% block body %}
 
-   <h1 class="page-header">
-        {{ profile.name }}
+   <h1 class="page-header profile-header">
+        <img class="gravatar" alt="{{ profile.name }}'s avatar" src="{% gravatar_for_email profile.email 40 %}">
+        <strong>{{ profile.name }}</strong>
         {% if profile.has_both_names %}
         ({{ profile.alternate_name }})
-        {% endif %}
-        {% if profile.title %}
-        <small>{{ profile.title }}</small>
         {% endif %}
         {% if profile.user == user %}
         <a href="{% url profile_edit %}" class="btn btn-primary" style="float: right;">
@@ -21,6 +20,13 @@
 
     <div class="row">
         <div class="span6 profile-bio">
+            {% if profile.title %}
+            <p style="font-weight: bold;">
+                <i class="icon-star"></i>
+                LUG {{ profile.title }}
+            </p>
+            {% endif %}
+
             <h2>Biography</h2>
 
             {% if profile.biography %}
@@ -35,14 +41,20 @@
         <div class="span6 profile-bits">
             <h2>More Information</h2>
 
-            <dl class="dl-horizontal">
-                <dt>Role:</dt>
-                <dd>{{ profile.get_role_display }}</dd>
-                {% for bit in profile.all_bits %}
-                <dt>{{ bit.bit_type.caption }}:</dt>
-                <dd>{{ bit.data_html }}</dd>
-                {% endfor %}
-            </dl>
+            <table class="bits table table-condensed">
+                <tbody>
+                    <tr>
+                        <th>Role:</th>
+                        <td>{{ profile.get_role_display }}</td>
+                    </tr>
+                    {% for bit in profile.all_bits %}
+                    <tr>
+                        <th>{{ bit.bit_type.caption }}:</th>
+                        <td>{{ bit.data_html }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 
