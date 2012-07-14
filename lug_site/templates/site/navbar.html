@@ -2,7 +2,7 @@
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <a class="brand" href="/">
+            <a class="brand" href="{% url index %}">
                 <img src="{% static "img/Tux-simple.svg" %}" class="logo" style="height: 70px;">
                 LUG @ NC State
             </a>
@@ -18,7 +18,8 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="{% url profile user.username %}">My Profile</a></li>
-                        <li><a>Log Out</a></li>
+                        <li><a href="{% url accounts_password_change %}">Change Password</a></li>
+                        <li><a href="{% url accounts_logout %}">Log Out</a></li>
                         {% if user.is_staff %}
                         <li class="divider"></li>
                         <li><a href="{% url admin:index %}">Site Admin</a></li>
@@ -29,7 +30,7 @@
                         (not logged in) <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a>Log In</a></li>
+                        <li><a href="{% url accounts_login %}">Log In</a></li>
                         <li><a>Register</a></li>
                     </ul>
                     {% endif %}

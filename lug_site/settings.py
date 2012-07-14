@@ -145,6 +145,7 @@ MESSAGE_TAGS = {
 }
 
 AUTH_PROFILE_MODULE = 'lug_people.MemberProfile'
+LOGIN_REDIRECT_URL = '/'
 
 GRAVATAR_DEFAULT_IMAGE = 'identicon'
 GRAVATAR_IMG_CLASS = 'gravatar'

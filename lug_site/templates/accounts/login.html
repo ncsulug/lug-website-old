@@ -1,0 +1,38 @@
+{% extends "layout_base.html" %}
+{% load bootstrap_toolkit %}
+
+{% block title %}Log In{% endblock title %}
+
+{% block body %}
+
+    <div class="row">
+
+        <div class="span6 offset3">
+            <h1>Log In</h1>
+
+            <ul>
+                <li>
+                    Don't have an account with us?
+                    <a>Register today!</a>
+                </li>
+                <li>
+                    Forgot your password?
+                    <a href="{% url accounts_password_reset %}">
+                        Have a new one emailed to you!
+                    </a>
+                </li>
+            </ul>
+
+            <form class="form-horizontal" action="" method="POST">
+                {% csrf_token %}
+                {{ form|as_bootstrap }}
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Log In</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+{% endblock body %}

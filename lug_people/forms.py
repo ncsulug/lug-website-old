@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from .models import MemberProfile, Bit
+from django import forms
 from django.forms.models import ModelForm, inlineformset_factory
-
 
 class ProfileEditForm(ModelForm):
     class Meta:

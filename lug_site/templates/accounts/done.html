@@ -1,0 +1,41 @@
+{% extends "layout_base.html" %}
+
+{% block title %}{{ action|title }}{% endblock title %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="span6 offset3">
+            <h1>Success!</h1>
+            
+            <p>
+                {% if action == "logged out" %}
+                You have logged out from the site. Please come back soon!
+                (Or come to a meeting, that's cool too.)
+                {% elif action == "password changed" %}
+                You have changed your password. (And we didn't even have
+                to log you out to do it!)
+                {% elif action == "password reset requested" %}
+                You have requested that your password be reset.
+                A link will be arriving in your mail shortly, so you
+                can finish the process.
+                {% elif action == "password reset" %}
+                Your password has been reset! Now you can log in again.
+                {% endif %}
+            </p>
+
+            <div class="form-actions">
+                {% if not user.is_authenticated %}
+                <a href="{% url accounts_login %}" class="btn btn-primary">
+                    Log In
+                </a>
+                {% endif %}
+                <a href="{% url index %}" class="btn">
+                    <i class="icon-arrow-left"></i>
+                    Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
