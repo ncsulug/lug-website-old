@@ -131,6 +131,7 @@ INSTALLED_APPS = (
     'bootstrap_toolkit',
     # Actual project apps
     'lug_people',
+    'lug_blog',
 )
 
 # This is for Bootstrap
