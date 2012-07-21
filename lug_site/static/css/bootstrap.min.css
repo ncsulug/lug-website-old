@@ -713,6 +713,9 @@ a.label:hover,a.badge:hover{color:#ffffff;text-decoration:none;cursor:pointer;}
 .show{display:block;}
 .invisible{visibility:hidden;}
 h1,h2,h3,h4,h5,h6,.navbar .brand{font-weight:700;}
+article>h1>a{color:#222222;}article>h1>a:hover{color:#cc0000;}
+article>.post-details{color:#888888;}
+code{color:#222222;}
 .nav a,.navbar .brand,.subnav a,a.btn,.dropdown-menu a{text-decoration:none;}
 .navbar{}.navbar .navbar-inner{-webkit-box-shadow:0 2px 4px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);-moz-box-shadow:0 2px 4px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);box-shadow:0 2px 4px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);border-top:1px solid #E5E5E5;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
 .navbar .brand{text-shadow:none;padding:0 20px 0;}.navbar .brand span{padding:23px 0 27px;}

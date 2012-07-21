@@ -1,4 +1,5 @@
 {% load profiles %}
+{% load lug_markup %}
 <article>
     <h1><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h1>
 
@@ -9,5 +10,5 @@
         </time>
     </p>
 
-    {{ post.content }}
+    {{ post.content|wikitext }}
 </article>

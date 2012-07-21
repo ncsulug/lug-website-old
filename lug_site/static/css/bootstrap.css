@@ -4208,6 +4208,18 @@ h6,
 .navbar .brand {
   font-weight: 700;
 }
+article > h1 > a {
+  color: #222222;
+}
+article > h1 > a:hover {
+  color: #cc0000;
+}
+article > .post-details {
+  color: #888888;
+}
+code {
+  color: #222222;
+}
 .nav a,
 .navbar .brand,
 .subnav a,
