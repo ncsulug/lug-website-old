@@ -11,6 +11,8 @@ class BlogPostManager(models.Manager):
 
 
 class BlogPost(models.Model):
+    objects = BlogPostManager()
+
     title           = models.CharField("title", max_length=240,
                         help_text=u"The post's headline.")
     slug            = models.SlugField("slug", unique_for_date='pub_date',

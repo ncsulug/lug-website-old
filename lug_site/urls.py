@@ -5,11 +5,11 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # General site views
-    url(r'^$', TemplateView.as_view(template_name="index.html"), name='index'),
+    # Blog views
+    url(r'^', include('lug_blog.urls')),
 
     # Profile and account views
-    (r'^', include('lug_people.urls')),
+    url(r'^', include('lug_people.urls')),
 
     # Admin interface and other internals
     url(r'^admin/', include(admin.site.urls)),

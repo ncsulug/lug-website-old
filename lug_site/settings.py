@@ -151,6 +151,12 @@ LOGIN_REDIRECT_URL = '/'
 GRAVATAR_DEFAULT_IMAGE = 'identicon'
 GRAVATAR_IMG_CLASS = 'gravatar'
 
+INTERWIKIS = {
+    'trilug': ('http://trilug.org/wiki/', '_'),
+    'wikipedia': ('http://en.wikipedia.org/wiki/', '_')
+}
+
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
