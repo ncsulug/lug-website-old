@@ -1,0 +1,13 @@
+{% load profiles %}
+<article>
+    <h1><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h1>
+
+    <p class="post-details">
+        Written by {% profile_link post.author %}
+        at <time datetime="{{ post.pub_date|date:"c" }}">
+            {{ post.pub_date|date:"P, l, F j, Y " }}
+        </time>
+    </p>
+
+    {{ post.content }}
+</article>

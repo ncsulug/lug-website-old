@@ -1,0 +1,21 @@
+{% extends "lug_blog/layout_blog.html" %}
+{% load profiles %}
+
+{% block title %}{{ post.title }}{% endblock title %}
+
+{% block content %}
+
+    <article>
+        <h1 class="page-header">{{ post.title }}</h1>
+
+        <p class="post-details">
+            Written by {% profile_link post.author %}
+            at <time datetime="{{ post.pub_date|date:"c" }}">
+                {{ post.pub_date|date:"P, l, F j, Y " }}
+            </time>
+        </p>
+
+        {{ post.content }}
+    </article>
+
+{% endblock content %}

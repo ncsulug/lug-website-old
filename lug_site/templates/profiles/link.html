@@ -1,0 +1,5 @@
+{% load gravatar %}
+<a href="{% url profile profile.username %}">
+    <img class="gravatar" alt="{{ profile.name }}'s avatar" src="{% gravatar_for_email profile.email 24 %}">
+    {{ profile.name }}
+</a>
