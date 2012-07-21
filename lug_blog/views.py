@@ -1,16 +1,12 @@
+from django.views.generic import DetailView
 from django.views.generic.dates import (ArchiveIndexView, YearArchiveView,
-                                        MonthArchiveView, DayArchiveView,
-                                        DateDetailView)
+                                        MonthArchiveView, DayArchiveView)
 from .models import BlogPost
 
-global_options = dict(
+archive_options = dict(
     model = BlogPost,
     queryset = BlogPost.objects.active(),
-    date_field = 'pub_date'
-)
-
-archive_options = global_options.copy()
-archive_options.update(
+    date_field = 'pub_date',
     context_object_name = 'posts',
     paginate_by = 10,
     allow_empty = False
@@ -23,6 +19,6 @@ month_archive = MonthArchiveView.as_view(month_format='%m',
                                          **archive_options)
 day_archive = DayArchiveView.as_view(month_format='%m',
                                      **archive_options)
-post_detail = DateDetailView.as_view(month_format='%m',
-                                     context_object_name='post',
-                                     **global_options)
+post_detail = DetailView.as_view(model = BlogPost,
+                                 queryset = BlogPost.objects.published(),
+                                 context_object_name='post')

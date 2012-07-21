@@ -1,6 +1,5 @@
 django>=1.4
-django-registration>=0.8
 django-bootstrap-toolkit
 django-gravatar
 South>=0.7
-
+pytz

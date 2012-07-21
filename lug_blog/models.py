@@ -37,6 +37,10 @@ class BlogPost(models.Model):
     def __unicode__(self):
         return self.title
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('blog_post', (), {'slug': self.slug})
+
     @property
     def is_published(self):
         return self.is_active and self.pub_date < timezone.now()

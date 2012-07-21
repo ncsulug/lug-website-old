@@ -8,7 +8,7 @@ DAY = r'(?P<day>\w{1,2})/'
 SLUG = r'(?P<slug>[\w-]+)/'
 
 urlpatterns = patterns('',
-    url('^' + YEAR + MONTH + DAY + SLUG, post_detail, name='blog_entry'),
+    url('^posts/' + SLUG, post_detail, name='blog_post'),
     url('^' + YEAR + MONTH + DAY, day_archive, name='blog_day'),
     url('^' + YEAR + MONTH, month_archive, name='blog_month'),
     url('^' + YEAR, year_archive, name='blog_year'),
