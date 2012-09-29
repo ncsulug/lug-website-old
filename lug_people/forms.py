@@ -7,7 +7,8 @@ from django.forms.models import ModelForm, inlineformset_factory
 class ProfileEditForm(ModelForm):
     class Meta:
         model = MemberProfile
-        fields = ('nickname', 'real_name', 'preferred_name', 'role')
+        fields = ('nickname', 'real_name', 'preferred_name', 'role',
+                  'biography')
 
 
 class RegistrationForm(ModelForm):

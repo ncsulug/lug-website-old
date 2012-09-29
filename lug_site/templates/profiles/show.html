@@ -1,5 +1,6 @@
 {% extends "layout_base.html" %}
 {% load gravatar %}
+{% load lug_markup %}
 
 {% block title %}{{ profile }}{% endblock title %}
 
@@ -30,7 +31,7 @@
             <h2>Biography</h2>
 
             {% if profile.biography %}
-            {{ profile.biography }}
+            {{ profile.biography|wikitext }}
             {% else %}
             <p>
                 ({{ profile.name }} hasn't written a biography yet.)

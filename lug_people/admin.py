@@ -20,7 +20,10 @@ class ProfileAdmin(admin.ModelAdmin):
         }),
         ('LUG Organizational Stuff', {
             'fields': ('title', 'role'),
-        })
+        }),
+        ('Profile Information', {
+            'fields': ('biography',),
+        }),
     )
     inlines = (BitInline,)
     list_display = ('user', '__unicode__', 'role', 'title')
@@ -35,7 +38,8 @@ class AccountRequestAdmin(admin.ModelAdmin):
     actions = ['approve_accounts', 'defer_accounts', 'destroy_accounts']
     fields = ('user', 'request_date', 'status', 'comments')
     date_hierarchy = 'request_date'
-    list_display = ('username', 'names', 'email', 'comments', 'request_date', 'status')
+    list_display = ('username', 'names', 'email', 'comments', 'request_date',
+                    'status')
     list_display_links = ('username',)
     list_filter = ('status', 'user__memberprofile__role')
     list_select_related = True

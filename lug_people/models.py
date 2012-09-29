@@ -43,6 +43,10 @@ class MemberProfile(models.Model):
                         help_text="What your relationship is to NC State. "
                                   "(If you are not affiliated with NC State "
                                   "except through the LUG, choose Visitor.)")
+    # Profile miscellanea
+    biography       = models.TextField("biography", blank=True,
+                        help_text="Anything you would like to say about "
+                                  "yourself (in WikiCreole format).")
 
     def __unicode__(self):
         return u"%s (%s)" % self.names if self.has_both_names else self.name
@@ -169,7 +173,7 @@ class BitType(models.Model):
         return self.caption
 
 
-username_validator = validators.RegexValidator("^[a-zA-Z0-9_.-]+$",
+username_validator = validators.RegexValidator("^[a-zA-Z0-9_.-`]+$",
                         u"The data must be a username (if this is "
                         "your actual username, contact leafstorm so he can "
                         "fix the regex).")
