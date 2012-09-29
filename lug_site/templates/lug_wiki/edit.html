@@ -35,7 +35,7 @@
 
                     {% if last_revision %}
                         <a class="btn"
-                           href="{% url wiki_view title=page.title|url_title">
+                           href="{% url wiki_view title=page.title|url_title %}">
                             Cancel
                         </a>
                     {% endif %}
