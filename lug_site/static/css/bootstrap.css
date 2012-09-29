@@ -4389,6 +4389,12 @@ pre.prettyprint,
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
+  padding: 32px;
+  background-image: url("/static/img/turtles-250.png");
+  background-origin: content-box;
+  background-position: right center;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 .table-bordered,
 .well,
