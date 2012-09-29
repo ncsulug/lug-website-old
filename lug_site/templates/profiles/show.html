@@ -10,12 +10,14 @@
         <img class="gravatar" alt="{{ profile.name }}'s avatar" src="{% gravatar_for_email profile.email 40 %}">
         <strong>{{ profile.name }}</strong>
         {% if profile.has_both_names %}
-        ({{ profile.alternate_name }})
+            ({{ profile.alternate_name }})
         {% endif %}
         {% if profile.user == user %}
-        <a href="{% url profile_edit %}" class="btn btn-primary" style="float: right;">
-            <i class="icon-pencil icon-white"></i> Edit Profile
-        </a>
+            <div class="btn-group pull-right">
+                <a href="{% url profile_edit %}" class="btn btn-primary">
+                    <i class="icon-pencil icon-white"></i> Edit Profile
+                </a>
+            </div>
         {% endif %}
     </h1>
 

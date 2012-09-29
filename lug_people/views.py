@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
 from django.views.generic.edit import FormView
@@ -17,6 +17,13 @@ class ProfileView(DetailView):
     slug_field = 'user__username'
     slug_url_kwarg = 'username'
     context_object_name = 'profile'
+
+    def get(self, request, *args, **kwargs):
+        profile = self.object = self.get_object()
+        if profile.is_protected and not request.user.is_active:
+            raise Http404()
+        context = self.get_context_data(object=profile)
+        return self.render_to_response(context)
 
 
 class RegisterView(FormView):

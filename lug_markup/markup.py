@@ -28,7 +28,6 @@ def wiki_link_path(link):
         # User profile
         return reverse('profile', args=[link[1:]])
     else:
-        # TODO: Make this actually do wiki links
         return reverse('wiki_view', kwargs={'title': link})
 
 

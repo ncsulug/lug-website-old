@@ -44,6 +44,9 @@ class MemberProfile(models.Model):
                                   "(If you are not affiliated with NC State "
                                   "except through the LUG, choose Visitor.)")
     # Profile miscellanea
+    is_protected    = models.BooleanField("profile protected?", default=False,
+                        help_text="If this is set, only LUG members can view "
+                                  "your profile.")
     biography       = models.TextField("biography", blank=True,
                         help_text="Anything you would like to say about "
                                   "yourself (in WikiCreole format).")

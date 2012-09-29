@@ -22,7 +22,7 @@ class ProfileAdmin(admin.ModelAdmin):
             'fields': ('title', 'role'),
         }),
         ('Profile Information', {
-            'fields': ('biography',),
+            'fields': ('is_protected', 'biography'),
         }),
     )
     inlines = (BitInline,)
