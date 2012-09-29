@@ -1,0 +1,27 @@
+{% extends "layout_base.html" %}
+
+{% load lug_wiki %}
+
+{% block title %}{{ title }} (Not Found){% endblock title %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="span10 offset1">
+            <div class="hero-unit">
+                <h2>{{ title }} does not exist.</h2>
+
+                <p>Would you like to create it?</p>
+
+                <div class="button-group">
+                    <a class="btn btn-large btn-primary"
+                       href="{% url wiki_edit title=title|url_title %}">
+                        <i class="icon-plus icon-white"></i>
+                        Create
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}

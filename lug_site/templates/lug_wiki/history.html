@@ -1,0 +1,57 @@
+{% extends "layout_base.html" %}
+
+{% load profiles %}
+{% load lug_wiki %}
+
+{% block title %}{{ page.title }} History{% endblock title %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="span12">
+
+            <h1 class="page-header">
+                {{ page.title }} History
+
+                <div class="btn-group pull-right">
+                    <a class="btn" href="{% url wiki_view title=page.title|url_title %}">
+                        <i class="icon-arrow-left"></i>
+                        Back to Page
+                    </a>
+                </a>
+            </h1>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Timestamp</th>
+                        <th>Author</th>
+                        <th>Change notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for revision in revisions %}
+                        <tr>
+                            <td>
+                                <a href="{% url wiki_revision title=page.title|url_title revision_id=revision.id %}">
+                                    <i class="icon-search"></i>
+                                    {{ revision.id }}
+                                </a>
+                            </td>
+                            <td>
+                                <time datetime="{{ revision.timestamp|date:"c" }}">
+                                    {{ revision.timestamp|date:"P, l, F j, Y" }}
+                                </time>
+                            </td>
+                            <td>{% profile_link revision.author %}</td>
+                            <td>{{ revision.change_note }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+{% endblock body %}

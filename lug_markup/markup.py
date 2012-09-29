@@ -29,7 +29,7 @@ def wiki_link_path(link):
         return reverse('profile', args=[link[1:]])
     else:
         # TODO: Make this actually do wiki links
-        return link
+        return reverse('wiki_view', kwargs={'title': link})
 
 
 def wiki_link_class(link):

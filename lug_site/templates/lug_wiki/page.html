@@ -1,0 +1,52 @@
+{% extends "layout_base.html" %}
+
+{% load profiles %}
+{% load lug_markup %}
+{% load lug_wiki %}
+
+{% block title %}{{ page.title }}{% endblock title %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="span12">
+            <article class="wiki-article">
+                <h1 class="page-header">
+                    {{ page.title }}
+
+                    <div class="btn-group pull-right">
+                        {% if editable %}
+                            <a class="btn btn-primary"
+                               href="{% url wiki_edit title=page.title|url_title %}">
+                                <i class="icon-pencil icon-white"></i>
+                                Edit
+                            </a>
+                        {% endif %}
+                        <a class="btn"
+                           href="{% url wiki_history title=page.title|url_title %}">
+                            <i class="icon-time"></i>
+                            History
+                        </a>
+                    </div>
+                </h1>
+
+                {{ revision.content|wikitext }}
+
+                <p class="post-details">
+                    Last updated by
+                    {% if revision.author %}
+                        {% profile_link revision.author %}
+                    {% else %}
+                        a ghost
+                    {% endif %}
+                    at <time datetime="{{ post.timestamp|date:"c" }}">
+                        {{ revision.timestamp|date:"P, l, F j, Y" }}
+                    </time>
+                </p>
+
+                <buttons>
+            </article>
+        </div>
+    </div>
+
+{% endblock body %}

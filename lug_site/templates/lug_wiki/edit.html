@@ -1,0 +1,56 @@
+{% extends "layout_base.html" %}
+
+{% load profiles %}
+{% load lug_markup %}
+{% load lug_wiki %}
+{% load bootstrap_toolkit %}
+
+{% block title %}{{ page.title }}{% endblock title %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="span12">
+
+            <h1 class="page-header">
+                {% if last_revision %}Editing{% else %}Creating{% endif %}
+                {{ page.title }}
+            </h1>
+
+            <form action="" method="POST">
+                {{ form|as_bootstrap }}
+                {% csrf_token %}
+
+                <div class="form-actions">
+                    <button class="btn btn-success" type="submit">
+                        <i class="icon-ok icon-white"></i>
+                        Save
+                    </button>
+
+                    <button class="btn" type="submit"
+                            name="action" value="preview">
+                        <i class="icon-search"></i>
+                        Preview
+                    </button>
+
+                    {% if last_revision %}
+                        <a class="btn"
+                           href="{% url wiki_view title=page.title|url_title">
+                            Cancel
+                        </a>
+                    {% endif %}
+                </div>
+            </form>
+
+            {% if preview_content %}
+                <article class="wiki-article well">
+                    <h2>Preview: {{ page.title }}</h2>
+                    <hr>
+
+                    {{ preview_content|wikitext }}
+                </article>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock body %}

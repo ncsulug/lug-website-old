@@ -8,6 +8,9 @@ urlpatterns = patterns('',
     # Blog views
     url(r'^', include('lug_blog.urls')),
 
+    # Wiki views
+    url(r'^wiki/', include('lug_wiki.urls')),
+
     # Profile and account views
     url(r'^', include('lug_people.urls')),
 
