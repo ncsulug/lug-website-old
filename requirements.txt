@@ -4,3 +4,4 @@ django-gravatar
 South>=0.7
 pytz
 Creoleparser
+tweepy

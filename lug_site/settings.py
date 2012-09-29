@@ -133,6 +133,7 @@ INSTALLED_APPS = (
     'lug_people',
     'lug_blog',
     'lug_markup',
+    'lug_twitter',
 )
 
 # This is for Bootstrap
