@@ -1,5 +1,7 @@
 {% extends "lug_blog/layout_archive.html" %}
 
+{% load lug_fortune %}
+
 {% block title %}Welcome{% endblock title %}
 
 {% block page_header %}
@@ -10,7 +12,7 @@
                 <h1>Linux Users' Group</h1>
 
                 <p>at North Carolina State University</p>
-                <p>&ldquo;We torture you with fun!&rdquo;</p>
+                <p><em>{% fortune %}</em></p>
             </div>
         </div>
     </div>

@@ -135,6 +135,7 @@ INSTALLED_APPS = (
     'lug_markup',
     'lug_twitter',
     'lug_wiki',
+    'lug_fortune',
 )
 
 # This is for Bootstrap
