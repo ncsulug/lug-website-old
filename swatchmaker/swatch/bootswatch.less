@@ -12,7 +12,7 @@ h1, h2, h3, h4, h5, h6, .navbar .brand {
 	font-weight: 700;
 }
 
-article > h1 > a {
+article > h1 > a, .title-link {
 	color: @textColor;
 	&:hover {
 		color: @linkColor;
@@ -238,5 +238,18 @@ table.form-grid td {
 	float: left;
 	margin: auto 0.5em auto 0;
 	height: 100%;
+}
+
+.tweets {
+	font-size: smaller;
+}
+
+.tweets .avatar-cell {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.tweets strong {
+	font-size: larger;
 }
 

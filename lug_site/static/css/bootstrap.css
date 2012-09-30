@@ -4208,10 +4208,12 @@ h6,
 .navbar .brand {
   font-weight: 700;
 }
-article > h1 > a {
+article > h1 > a,
+.title-link {
   color: #222222;
 }
-article > h1 > a:hover {
+article > h1 > a:hover,
+.title-link:hover {
   color: #cc0000;
 }
 article > .post-details {
@@ -4446,6 +4448,16 @@ table.form-grid td.symbolic-checkbox {
   float: left;
   margin: auto 0.5em auto 0;
   height: 100%;
+}
+.tweets {
+  font-size: smaller;
+}
+.tweets .avatar-cell {
+  padding-left: 0;
+  padding-right: 0;
+}
+.tweets strong {
+  font-size: larger;
 }
 .pull-right {
   float: right;

@@ -1,21 +1,22 @@
-{% for t in tweets %}
-
-<hr />
-
-<p>
-{% if t.user_pic %}
-<a href="http://twitter.com/{{ t.user }}">
-<img src="{{ t.user_pic }}" alt="" />
-</a>
-{% endif %}
-
-<strong>@{{ t.user }}</strong><br />
-{{ t.text }}<br />
-<sub><a href="{{t.link}}">{{ t.timestamp }}</a></sub>
-
-</p>
-
-{% endfor %}
-
-<hr />
-
+<table class="table tweets">
+    <tbody>
+        {% for t in tweets %}
+        <tr>
+            <td class="avatar-cell">
+                {% if t.user_pic %}
+                <a href="https://www.twitter.com/{{ t.user }}">
+                    <img src="{{ t.user_pic }}">
+                </a>
+                {% endif %}
+            </td>
+            <td>
+                <a class="title-link" href="https://www.twitter.com/{{ t.user }}">
+                    <strong>@{{ t.user }}</strong>
+                </a><br>
+                {{ t.text }}<br>
+                <a href="{{ t.link }}">{{ t.timestamp|timesince }}</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

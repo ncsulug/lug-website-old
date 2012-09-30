@@ -713,7 +713,7 @@ a.label:hover,a.badge:hover{color:#ffffff;text-decoration:none;cursor:pointer;}
 .show{display:block;}
 .invisible{visibility:hidden;}
 h1,h2,h3,h4,h5,h6,.navbar .brand{font-weight:700;}
-article>h1>a{color:#222222;}article>h1>a:hover{color:#cc0000;}
+article>h1>a,.title-link{color:#222222;}article>h1>a:hover,.title-link:hover{color:#cc0000;}
 article>.post-details{color:#888888;}
 code{color:#222222;}
 .nav a,.navbar .brand,.subnav a,a.btn,.dropdown-menu a{text-decoration:none;}
@@ -749,6 +749,9 @@ table.form-grid td .help-block{margin-top:9px;margin-bottom:0;}
 table.form-grid td.symbolic-checkbox{vertical-align:middle;white-space:nowrap;}
 .profile-header{font-weight:normal;}
 .license-logo{display:block;float:left;margin:auto 0.5em auto 0;height:100%;}
+.tweets{font-size:smaller;}
+.tweets .avatar-cell{padding-left:0;padding-right:0;}
+.tweets strong{font-size:larger;}
 .pull-right{float:right;}
 .pull-left{float:left;}
 .hide{display:none;}

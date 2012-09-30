@@ -20,5 +20,5 @@ def fortune():
     try:
         return Fortune.objects.order_by("?")[0].value
     except:
-        return "Segmentation Fault"
+        return "[Segmentation Fault]"
 
