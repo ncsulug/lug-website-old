@@ -9,4 +9,4 @@ def profile_link(context, profile):
         profile = profile.get_profile()
     user_active = context['user'].is_active
     return {'profile': profile,
-            'link': user_active and not profile.is_protected}
+            'link': user_active or not profile.is_protected}
