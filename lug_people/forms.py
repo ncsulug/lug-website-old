@@ -40,6 +40,9 @@ class RegistrationForm(ModelForm):
         if 'password1' in data and 'password2' in data:
             if data['password1'] != data['password2']:
                 raise forms.ValidationError("The two password fields didn't match.")
+
+        if 'comments' in data and len(data['comments'].strip()) == 0:
+            raise forms.ValidationError("You must enter comments.")
         return data
 
 
