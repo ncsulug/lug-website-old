@@ -38,6 +38,10 @@ class MemberProfile(models.Model):
     title           = models.CharField("title", max_length=64, blank=True,
                         help_text="Official LUG title, as officer or "
                                   "committee chair.")
+    ordering        = models.PositiveIntegerField("ordering", default=0,
+                        help_text="Relative order on the member directory, "
+                                  "for LUG officers (higher numbers appear "
+                                  "first, regular members should be 0).")
     role            = models.CharField("role", max_length=8,
                         choices=ROLE_CHOICES, default=u"visitor",
                         help_text="What your relationship is to NC State. "

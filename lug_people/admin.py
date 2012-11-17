@@ -19,14 +19,14 @@ class ProfileAdmin(admin.ModelAdmin):
             'fields': ('nickname', 'real_name', 'preferred_name')
         }),
         ('LUG Organizational Stuff', {
-            'fields': ('title', 'role'),
+            'fields': ('title', 'ordering', 'role'),
         }),
         ('Profile Information', {
             'fields': ('is_protected', 'biography'),
         }),
     )
     inlines = (BitInline,)
-    list_display = ('user', '__unicode__', 'role', 'title')
+    list_display = ('user', '__unicode__', 'role', 'title', 'ordering')
     list_display_links = ('user',)
     list_filter = ('role', 'user__is_active')
     ordering = ('user__username',)

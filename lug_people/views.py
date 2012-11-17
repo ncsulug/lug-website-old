@@ -18,10 +18,12 @@ class DirectoryView(ListView):
 
     def get_queryset(self):
         if self.request.user.is_active:
-            return MemberProfile.objects.filter(user__is_active=True)
+            return MemberProfile.objects.filter(user__is_active=True) \
+                                        .order_by('-ordering', 'user__username')
         else:
             return MemberProfile.objects.filter(user__is_active=True,
-                                                is_protected=False)
+                                                is_protected=False) \
+                                        .order_by('-ordering', 'user__username')
 
 
 class ProfileView(DetailView):
