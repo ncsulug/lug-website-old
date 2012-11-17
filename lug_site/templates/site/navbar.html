@@ -1,4 +1,6 @@
 {% load static from staticfiles %}
+{% load get_navbar_links from lug_wiki %}
+
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
@@ -7,8 +9,12 @@
                 LUG @ NC State
             </a>
             <ul class="nav">
-                <li><a>Blog</a></li>
-                <li><a>IRC</a></li>
+                {% get_navbar_links as links %}
+                {% for link in links %}
+                    <li>
+                        <a href="{{ link.url }}">{{ link.text }}</a>
+                    </li>
+                {% endfor %}
             </ul>
             <ul class="nav pull-right">
                 <li class="dropdown">

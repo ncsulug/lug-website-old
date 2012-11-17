@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.core.urlresolvers import reverse
 from lug_people.models import MemberProfile
 
 class Page(models.Model):
@@ -74,3 +75,27 @@ class Revision(models.Model):
 
     def __unicode__(self):
         return u"%s revision %d" % (self.page.title, self.id)
+
+
+class NavbarLink(models.Model):
+    text            = models.CharField("link text", max_length=32,
+                        help_text=u"The text to display in the navbar.")
+    target          = models.CharField("target", max_length=255,
+                        help_text=u"If there's a /, it's a URL or path. "
+                                   "With no /, it's the name of a wiki page.")
+    ordering        = models.PositiveIntegerField("ordering", db_index=True,
+                        help_text=u"The position of this item in the navbar. "
+                                   "Higher numbers are sorted first.")
+
+    class Meta:
+        ordering = ["-ordering", "text"]
+
+    def __unicode__(self):
+        return self.text
+
+    @property
+    def url(self):
+        if '/' in self.target:
+            return self.target
+        else:
+            return reverse('wiki_view', kwargs={'title': self.target})
