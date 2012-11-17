@@ -5,4 +5,5 @@ South>=0.7
 pytz
 django-redis
 Creoleparser
+Pygments
 tweepy
