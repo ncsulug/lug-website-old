@@ -21,6 +21,25 @@ DATABASES = {
     }
 }
 
+# If you have Redis installed, copy this.
+CACHES = {
+    'default': {
+        'BACKEND': 'redis_cache.cache.RedisCache',
+        'LOCATION': '127.0.0.1:6379:5',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
+        }
+    }
+}
+
+# If you don't have Redis installed, copy this.
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'ncsulug'
+    }
+}
+
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = ''
 
