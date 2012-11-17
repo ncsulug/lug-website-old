@@ -1,0 +1,74 @@
+<p>
+    The LUG Wiki uses <a href="http://wikicreole.org/">WikiCreole 1.1</a>
+    markup, with a few modifications.
+    Here's the most important stuff:
+</p>
+
+<h3>Inline Markup</h3>
+
+<table class="table table-condensed">
+    <tbody>
+        <tr>
+            <td>
+                <code>//italics//</code>
+            </td>
+            <td>
+                <em>emphasis</em>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>**strong**</code>
+            </td>
+            <td>
+                <strong>strong</strong>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>`inline code`</code>
+            </td>
+            <td>
+                <code>inline code</code>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h3>Headings</h3>
+
+<pre>
+== Heading 2
+=== Heading 3
+==== Heading 4
+</pre>
+
+
+<h3>Links</h3>
+
+<p>
+    Links to URLs and wiki pages take the form <code>[[target|text]]</code>.
+    If the text to display is the same as the target, you can just use
+    <code>[[target]]</code>.
+</p>
+
+<p>
+    Link to users' profiles with <code>[[~username]]</code>.
+</p>
+
+
+<h3>Code</h3>
+
+<p>
+    Enclose code blocks in <code>{&zwnj;{&zwnj;{</code> and
+    <code>}&zwnj;}&zwnj;}</code>. To syntax-highlight it, put
+    <code>#!language</code> at the front. For example:
+</p>
+
+<pre>
+{&zwnj;{&zwnj;{
+#!python
+print "Hello, world!"
+}&zwnj;}&zwnj;}
+</pre>

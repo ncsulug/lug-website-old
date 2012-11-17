@@ -57,11 +57,11 @@ def edit_page(request, title):
                     initial={'content': last_content})
     preview_content = None
 
-    if request.method == "POST" and form.is_valid():
+    if request.method == "POST":
+        valid = form.is_valid()
         if request.POST.get('action') == 'preview':
-            preview_content = form.cleaned_data.get('content',
-                                                    form.data['content'])
-        else:
+            preview_content = form.preview_content
+        elif valid:
             form.save()
             return HttpResponseRedirect(reverse('wiki_view', kwargs={
                 'title': title.replace(" ", "_")

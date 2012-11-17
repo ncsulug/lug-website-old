@@ -9,15 +9,24 @@
 
 {% block body %}
 
-    <div class="row">
-        <div class="span12">
+    <h1 class="page-header">
+        {% if last_revision %}Editing{% else %}Creating{% endif %}
+        {{ page.title }}
+    </h1>
 
-            <h1 class="page-header">
-                {% if last_revision %}Editing{% else %}Creating{% endif %}
-                {{ page.title }}
-            </h1>
+    {% if preview_content %}
+        <article class="wiki-article well">
+            <h2>Preview: {{ page.title }}</h2>
+            <hr>
 
-            <form action="" method="POST">
+            {{ preview_content|wikitext }}
+        </article>
+    {% endif %}
+
+    <form action="" method="POST">
+
+        <div class="row">
+            <div class="span8">
                 {{ form|as_bootstrap }}
                 {% csrf_token %}
 
@@ -40,17 +49,14 @@
                         </a>
                     {% endif %}
                 </div>
-            </form>
+            </div>
 
-            {% if preview_content %}
-                <article class="wiki-article well">
-                    <h2>Preview: {{ page.title }}</h2>
-                    <hr>
-
-                    {{ preview_content|wikitext }}
-                </article>
-            {% endif %}
+            <div class="span4">
+                <div id="markup-help" class="well">
+                    {% include "lug_wiki/markup.html" %}
+                </div>
+            </div>
         </div>
-    </div>
+    </form>
 
 {% endblock body %}

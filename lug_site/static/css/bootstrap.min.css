@@ -739,7 +739,8 @@ div.subnav .nav>li:first-child>a,div.subnav .nav>li:first-child>a:hover{-webkit-
 .modal-header{border-bottom:none;}
 .modal-header .close{text-decoration:none;}
 .modal-footer{background:transparent;-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;border-top:none;}
-code,pre,pre.prettyprint,.well{background-color:#eeeeee;}
+code,pre,pre.prettyprint{background-color:#eeeeee;}
+.well{background-color:#f8f8f8;}
 .hero-unit{-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);-moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);border:1px solid rgba(0, 0, 0, 0.05);-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;padding:32px;background-image:url("/static/img/turtles-250.png");background-origin:content-box;background-position:right center;background-size:contain;background-repeat:no-repeat;}
 .table-bordered,.well,.prettyprint{-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
 body.with-navbar{padding-top:90px;}
