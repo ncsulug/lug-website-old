@@ -1,0 +1,71 @@
+{% extends "layout_base.html" %}
+{% load gravatar %}
+{% load lug_markup %}
+{% load profiles %}
+
+{% block title %}Member Directory{% endblock title %}
+
+{% block body %}
+
+    <h1 class="page-header profile-header">
+        Member Directory
+    </h1>
+
+    <table class="table">
+        <tbody>
+            {% for profile in members %}
+                <tr>
+                    <td style="width: 1em;">
+                        <a href="{% url profile profile.username %}">
+                            <img class="gravatar" alt="{{ profile.name }}'s avatar"
+                                 src="{% gravatar_for_email profile.email 40 %}">
+                        </a>
+                    </td>
+                    <td style="white-space: nowrap;">
+                        <a class="username" href="{% url profile profile.username %}">
+                            {{ profile.name }}
+                        </a>
+                        {% if profile.has_both_names %}
+                            <br>
+                            {{ profile.alternate_name }}
+                        {% endif %}
+                    </td>
+                    <td style="width: 70%;">
+                        {% if profile.title %}
+                            <p>
+                                <strong>
+                                    <i class="icon-star"></i>
+                                    LUG {{ profile.title }}
+                                </strong>
+                            </p>
+                        {% endif %}
+                        {{ profile.biography|wikitext|truncatewords_html:30 }}
+                    </td>
+                </tr>
+            {% endfor %}
+    </table>
+
+    {% comment %}
+    <div class="row">
+        {% for profile in members %}
+            <div class="span3">
+                <img class="gravatar side-avatar" alt="{{ profile.name }}'s avatar"
+                     src="{% gravatar_for_email profile.email 40 %}">
+                <p>
+                    <a href="{% url profile profile.username %}">
+                        <strong>{{ profile.name }}</strong>
+                    </a><br>
+                    {% if profile.has_both_names %}
+                        {{ profile.alternate_name }}<br>
+                    {% endif %}
+                    {% if profile.title %}
+                        <i class="icon-star"></i>
+                        LUG {{ profile.title }}
+                    {% endif %}
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+    {% endcomment %}
+
+{% endblock body %}

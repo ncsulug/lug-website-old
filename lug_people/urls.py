@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.auth import views as auth_views
-from .views import ProfileView, ProfileEditView, RegisterView
+from .views import ProfileView, DirectoryView, ProfileEditView, RegisterView
 
 account_patterns = patterns('',
     # Edit Profile
@@ -63,6 +63,10 @@ urlpatterns = patterns('',
     url(r'^~(?P<username>[a-zA-Z0-9@+.-]+)/$',
         ProfileView.as_view(template_name='profiles/show.html'),
         name='profile'),
-    
+
+    url(r'^directory/',
+        DirectoryView.as_view(template_name='profiles/directory.html'),
+        name='directory'),
+
     (r'^accounts/', include(account_patterns)),
 )

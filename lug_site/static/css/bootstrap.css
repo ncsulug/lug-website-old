@@ -4410,6 +4410,9 @@ pre.prettyprint {
 body.with-navbar {
   padding-top: 90px;
 }
+.username {
+  font-size: 16px;
+}
 .gravatar {
   border: 1px solid #eeeeee;
   padding: 2px;
@@ -4450,6 +4453,11 @@ table.form-grid td.symbolic-checkbox {
   float: left;
   margin: auto 0.5em auto 0;
   height: 100%;
+}
+.side-avatar {
+  float: left;
+  max-height: 100%;
+  margin-right: 8px;
 }
 .tweets {
   font-size: smaller;

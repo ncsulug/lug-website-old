@@ -7,9 +7,21 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, Http404
 from django.utils.decorators import method_decorator
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 from django.views.generic.edit import FormView
 from django.views.generic.base import View, TemplateResponseMixin
+
+
+class DirectoryView(ListView):
+    model = MemberProfile
+    context_object_name = 'members'
+
+    def get_queryset(self):
+        if self.request.user.is_active:
+            return MemberProfile.objects.filter(user__is_active=True)
+        else:
+            return MemberProfile.objects.filter(user__is_active=True,
+                                                is_protected=False)
 
 
 class ProfileView(DetailView):
