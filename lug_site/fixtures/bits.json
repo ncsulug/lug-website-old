@@ -1,0 +1,230 @@
+[
+    {
+        "pk": 2, 
+        "model": "lug_people.bittype", 
+        "fields": {
+            "format": "url", 
+            "ordering": 0, 
+            "link_template": "", 
+            "caption": "Website", 
+            "slug": "website", 
+            "instructions": "Enter the URL of your Website."
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "lug_people.bittype", 
+        "fields": {
+            "format": "freetext", 
+            "ordering": 5, 
+            "link_template": "", 
+            "caption": "Blog", 
+            "slug": "blog", 
+            "instructions": "Enter the URL of your blog, if it differs from your normal Website."
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "lug_people.bittype", 
+        "fields": {
+            "format": "username", 
+            "ordering": 10, 
+            "link_template": "https://twitter.com/%s", 
+            "caption": "Twitter", 
+            "slug": "twitter", 
+            "instructions": "Enter your Twitter username (without the @)."
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "lug_people.bittype", 
+        "fields": {
+            "format": "freetext", 
+            "ordering": 15, 
+            "link_template": "", 
+            "caption": "PGP Key ID", 
+            "slug": "pgp-key-id", 
+            "instructions": "Enter your PGP key ID (8 hexits)."
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "lug_people.bittype", 
+        "fields": {
+            "format": "freetext", 
+            "ordering": 15, 
+            "link_template": "", 
+            "caption": "Radio Callsign", 
+            "slug": "radio-callsign", 
+            "instructions": "Enter the callsign you use for ham and other types of radio."
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "lug_people.bittype", 
+        "fields": {
+            "format": "freetext", 
+            "ordering": 20, 
+            "link_template": "", 
+            "caption": "Employer", 
+            "slug": "employer", 
+            "instructions": "Enter the name of your employer."
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "lug_people.bittype", 
+        "fields": {
+            "format": "freetext", 
+            "ordering": 20, 
+            "link_template": "", 
+            "caption": "Major", 
+            "slug": "major", 
+            "instructions": "Enter what you majored in (if applicable)."
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "lug_people.bittype", 
+        "fields": {
+            "format": "freetext", 
+            "ordering": 25, 
+            "link_template": "", 
+            "caption": "Graduation Year", 
+            "slug": "graduation-year", 
+            "instructions": "Enter the year you received your undergraduate degree."
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "lug_people.bittype", 
+        "fields": {
+            "format": "freetext", 
+            "ordering": 30, 
+            "link_template": "", 
+            "caption": "Hometown", 
+            "slug": "hometown", 
+            "instructions": "Enter the place you are from originally."
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "lug_people.bittype", 
+        "fields": {
+            "format": "username", 
+            "ordering": 40, 
+            "link_template": "https://www.bitbucket.org/%s", 
+            "caption": "Bitbucket", 
+            "slug": "bitbucket", 
+            "instructions": "Enter your Bitbucket username."
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "lug_people.bittype", 
+        "fields": {
+            "format": "username", 
+            "ordering": 40, 
+            "link_template": "https://www.github.com/%s", 
+            "caption": "GitHub", 
+            "slug": "github", 
+            "instructions": "Enter your GitHub username."
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "lug_people.bittype", 
+        "fields": {
+            "format": "freetext", 
+            "ordering": 45, 
+            "link_template": "", 
+            "caption": "Steam Name", 
+            "slug": "steam-name", 
+            "instructions": "Enter your Steam username."
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "lug_people.bittype", 
+        "fields": {
+            "format": "freetext", 
+            "ordering": 46, 
+            "link_template": "", 
+            "caption": "Minecraft Name", 
+            "slug": "minecraft-name", 
+            "instructions": "Enter your Minecraft username (in-game)."
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "lug_people.bittype", 
+        "fields": {
+            "format": "freetext", 
+            "ordering": 50, 
+            "link_template": "", 
+            "caption": "Expertise", 
+            "slug": "expertise", 
+            "instructions": "Enter something you are good at, that you like to share with people."
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "lug_people.bittype", 
+        "fields": {
+            "format": "freetext", 
+            "ordering": 50, 
+            "link_template": "", 
+            "caption": "Thesis Title", 
+            "slug": "thesis-title", 
+            "instructions": "Enter the (working) title of your thesis."
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "lug_people.bittype", 
+        "fields": {
+            "format": "freetext", 
+            "ordering": 55, 
+            "link_template": "", 
+            "caption": "Human Languages", 
+            "slug": "human-langs", 
+            "instructions": "Enter the human languages you can speak, read, or write."
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "lug_people.bittype", 
+        "fields": {
+            "format": "freetext", 
+            "ordering": 55, 
+            "link_template": "", 
+            "caption": "Programming Languages", 
+            "slug": "programming-lang", 
+            "instructions": "Enter the programming language(s) you know well."
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "lug_people.bittype", 
+        "fields": {
+            "format": "freetext", 
+            "ordering": 60, 
+            "link_template": "", 
+            "caption": "Favorite Distro", 
+            "slug": "favorite-distro", 
+            "instructions": "Enter your favorite Linux distribution(s)."
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "lug_people.bittype", 
+        "fields": {
+            "format": "freetext", 
+            "ordering": 80, 
+            "link_template": "", 
+            "caption": "Favorite Pok\u00e9mon", 
+            "slug": "favorite-pokemon", 
+            "instructions": "Enter your favorite species of Pok\u00e9mon."
+        }
+    }
+]
