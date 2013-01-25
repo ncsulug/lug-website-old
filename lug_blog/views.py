@@ -6,6 +6,7 @@ from django.views.generic.dates import (ArchiveIndexView, YearArchiveView,
 from django.contrib.syndication.views import Feed
 from .models import BlogPost
 
+from lug_markup.markup import render_markup
 
 archive_options = dict(
     model = BlogPost,
@@ -41,5 +42,5 @@ class BlogFeed(Feed):
         return item.title
 
     def item_description(self, item):
-        return item.content
+        return render_markup(item.content)
 
