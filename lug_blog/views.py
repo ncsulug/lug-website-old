@@ -1,5 +1,4 @@
 from django.http import HttpResponse
-from django.core.urlresolvers import reverse
 from django.views.generic import DetailView
 from django.views.generic.dates import (ArchiveIndexView, YearArchiveView,
                                         MonthArchiveView, DayArchiveView)
