@@ -9,7 +9,7 @@ from django.shortcuts import render
 def view_page(request, title, revision_id=None):
     title = title.replace("_", " ")
     try:
-        page = Page.objects.get(title=title)
+        page = Page.objects.get(title__iexact=title)
     except Page.DoesNotExist:
         return render(request, "lug_wiki/not-found.html", {'title': title},
                       status=404)
