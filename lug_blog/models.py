@@ -15,8 +15,7 @@ class BlogTag(models.Model):
              help_text=u"The name of the tag.")
     
     def __unicode__(self):
-        return u"#"+self.name
-
+        return u"#" + self.name
 
 
 class BlogPost(models.Model):
