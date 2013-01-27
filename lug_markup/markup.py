@@ -10,6 +10,7 @@ from pygments.formatters import HtmlFormatter
 from pygments.lexers import get_lexer_by_name
 from pygments.styles.autumn import AutumnStyle
 from pygments.util import ClassNotFound
+from lug_people.models import MemberProfile
 
 global_cache = {}
 
@@ -17,7 +18,7 @@ global_cache = {}
 INLINE_MARKUP = [
     ('**','strong'),    ('//','em'),        (',,','sub'),
     ('^^','sup'),       ('__','u'),         ('##','code'),
-    ('`', 'code')
+    ('`', 'code'),      ('--','del'),
 ]
 
 def build_interwikis():
@@ -33,7 +34,7 @@ def build_interwikis():
 def wiki_link_path(link):
     if link.startswith("~"):
         # User profile
-        return reverse('profile', args=[link[1:]])
+        return reverse('profile', args=[MemberProfile.make_username(link[1:])])
     else:
         return reverse('wiki_view', kwargs={'title': link})
 
