@@ -2,8 +2,9 @@ from django.http import HttpResponse
 from django.views.generic import DetailView
 from django.views.generic.dates import (ArchiveIndexView, YearArchiveView,
                                         MonthArchiveView, DayArchiveView)
+from django.http import Http404
 from django.contrib.syndication.views import Feed
-from .models import BlogPost
+from .models import BlogPost, BlogTag
 
 from lug_markup.markup import render_markup
 
@@ -16,7 +17,18 @@ archive_options = dict(
     allow_empty = False
 )
 
+
+class TagArchiveView(ArchiveIndexView):
+    def get_queryset(self):
+        try:
+            tag = BlogTag.objects.get(name__iexact=self.kwargs['slug'])
+            return BlogPost.objects.active().filter(tags__id=tag.id)
+        except:
+            return BlogPost.objects.none()
+
+
 archive_index = ArchiveIndexView.as_view(**archive_options)
+tag_archive = TagArchiveView.as_view(**archive_options)
 year_archive = YearArchiveView.as_view(make_object_list=True,
                                        **archive_options)
 month_archive = MonthArchiveView.as_view(month_format='%m',
@@ -26,8 +38,6 @@ day_archive = DayArchiveView.as_view(month_format='%m',
 post_detail = DetailView.as_view(model = BlogPost,
                                  queryset = BlogPost.objects.published(),
                                  context_object_name='post')
-
-
 
 class BlogFeed(Feed):
     title = "LUG @ NC State"

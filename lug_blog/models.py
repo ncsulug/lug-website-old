@@ -10,6 +10,15 @@ class BlogPostManager(models.Manager):
         return self.active().filter(pub_date__lte=timezone.now())
 
 
+class BlogTag(models.Model):
+    name = models.SlugField("title", max_length=64,
+             help_text=u"The name of the tag.")
+    
+    def __unicode__(self):
+        return u"#"+self.name
+
+
+
 class BlogPost(models.Model):
     objects = BlogPostManager()
 
@@ -27,6 +36,8 @@ class BlogPost(models.Model):
                         help_text=u"When this article is to be published. "
                                   u"(Set it to the future, and it will not "
                                   u"appear until then.)")
+    tags            = models.ManyToManyField(BlogTag, blank=True,
+                        help_text=u"The tags for this blog post.")
 
     class Meta:
         verbose_name = 'blog post'
@@ -44,3 +55,4 @@ class BlogPost(models.Model):
     @property
     def is_published(self):
         return self.is_active and self.pub_date < timezone.now()
+

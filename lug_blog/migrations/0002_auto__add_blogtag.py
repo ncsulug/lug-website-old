@@ -8,22 +8,28 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'BlogPost'
-        db.create_table('lug_blog_blogpost', (
+        # Adding model 'BlogTag'
+        db.create_table('lug_blog_blogtag', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=240)),
-            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=50)),
-            ('content', self.gf('django.db.models.fields.TextField')()),
-            ('author', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['lug_people.MemberProfile'])),
-            ('is_active', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('pub_date', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
+            ('name', self.gf('django.db.models.fields.SlugField')(max_length=64)),
         ))
-        db.send_create_signal('lug_blog', ['BlogPost'])
+        db.send_create_signal('lug_blog', ['BlogTag'])
+
+        # Adding M2M table for field tags on 'BlogPost'
+        db.create_table('lug_blog_blogpost_tags', (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('blogpost', models.ForeignKey(orm['lug_blog.blogpost'], null=False)),
+            ('blogtag', models.ForeignKey(orm['lug_blog.blogtag'], null=False))
+        ))
+        db.create_unique('lug_blog_blogpost_tags', ['blogpost_id', 'blogtag_id'])
 
 
     def backwards(self, orm):
-        # Deleting model 'BlogPost'
-        db.delete_table('lug_blog_blogpost')
+        # Deleting model 'BlogTag'
+        db.delete_table('lug_blog_blogtag')
+
+        # Removing M2M table for field tags on 'BlogPost'
+        db.delete_table('lug_blog_blogpost_tags')
 
 
     models = {
@@ -71,12 +77,21 @@ class Migration(SchemaMigration):
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'pub_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50'}),
+            'tags': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['lug_blog.BlogTag']", 'symmetrical': 'False'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '240'})
+        },
+        'lug_blog.blogtag': {
+            'Meta': {'object_name': 'BlogTag'},
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.SlugField', [], {'max_length': '64'})
         },
         'lug_people.memberprofile': {
             'Meta': {'object_name': 'MemberProfile'},
+            'biography': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'is_protected': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'nickname': ('django.db.models.fields.CharField', [], {'max_length': '32'}),
+            'ordering': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'}),
             'preferred_name': ('django.db.models.fields.CharField', [], {'default': "u'nick'", 'max_length': '4'}),
             'real_name': ('django.db.models.fields.CharField', [], {'max_length': '64', 'blank': 'True'}),
             'role': ('django.db.models.fields.CharField', [], {'default': "u'visitor'", 'max_length': '8'}),
