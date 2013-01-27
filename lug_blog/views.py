@@ -2,7 +2,6 @@ from django.http import HttpResponse
 from django.views.generic import DetailView
 from django.views.generic.dates import (ArchiveIndexView, YearArchiveView,
                                         MonthArchiveView, DayArchiveView)
-from django.http import Http404
 from django.contrib.syndication.views import Feed
 from .models import BlogPost, BlogTag
 
