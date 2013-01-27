@@ -15,7 +15,7 @@ def view_page(request, title, revision_id=None):
         if len(page_list) != 0:
             return redirect("wiki_view", title=page_list[0].title )
         return render(request, "lug_wiki/not-found.html", {'title': title},
-                       status=404)
+                      status=404)
 
 
     if revision_id:
