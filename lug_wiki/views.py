@@ -4,15 +4,20 @@ from .models import Page, Revision
 from django.core.urlresolvers import reverse
 from django.http import (HttpResponse, HttpResponseRedirect,
                          HttpResponseForbidden, Http404)
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 def view_page(request, title, revision_id=None):
     title = title.replace("_", " ")
     try:
         page = Page.objects.get(title=title)
     except Page.DoesNotExist:
+        page_list = Page.objects.filter(title__iexact=title).all()
+        if page_list:
+            title = page_list[0].title.replace(" ", "_")
+            return redirect("wiki_view", title=title )
         return render(request, "lug_wiki/not-found.html", {'title': title},
                       status=404)
+
 
     if revision_id:
         try:
@@ -40,11 +45,14 @@ def view_page(request, title, revision_id=None):
 
 def edit_page(request, title):
     title = title.replace("_", " ")
-
     try:
         page = Page.objects.get(title=title)
         last_revision = page.latest_revision
     except Page.DoesNotExist:
+        page_list = Page.objects.filter(title__iexact=title).all()
+        if page_list:
+            title = page_list[0].title.replace(" ", "_")
+            return redirect("wiki_edit", title=title )
         page = Page(title=title)
         last_revision = None
     last_content = None if last_revision is None else last_revision.content
@@ -78,6 +86,10 @@ def page_history(request, title):
     try:
         page = Page.objects.get(title=title)
     except Page.DoesNotExist:
+        page_list = Page.objects.filter(title__iexact=title).all()
+        if page_list:
+            title = page_list[0].title.replace(" ", "_")
+            return redirect("wiki_history", title=title )
         raise Http404()
 
     if not page.user_may_view(request.user):
@@ -86,3 +98,4 @@ def page_history(request, title):
     return render(request, "lug_wiki/history.html", {
         'page': page, 'revisions': page.revisions.order_by("-timestamp").all()
     })
+
