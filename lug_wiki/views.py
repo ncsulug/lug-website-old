@@ -4,15 +4,19 @@ from .models import Page, Revision
 from django.core.urlresolvers import reverse
 from django.http import (HttpResponse, HttpResponseRedirect,
                          HttpResponseForbidden, Http404)
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 def view_page(request, title, revision_id=None):
     title = title.replace("_", " ")
     try:
-        page = Page.objects.get(title__iexact=title)
+        page = Page.objects.get(title=title)
     except Page.DoesNotExist:
+        page_list = Page.objects.filter(title__iexact=title).all()
+        if len(page_list) != 0:
+            return redirect("wiki_view", title=page_list[0].title )
         return render(request, "lug_wiki/not-found.html", {'title': title},
-                      status=404)
+                       status=404)
+
 
     if revision_id:
         try:
@@ -45,6 +49,9 @@ def edit_page(request, title):
         page = Page.objects.get(title=title)
         last_revision = page.latest_revision
     except Page.DoesNotExist:
+        page_list = Page.objects.filter(title__iexact=title).all()
+        if len(page_list) != 0:
+            return redirect("wiki_edit", title=page_list[0].title )
         page = Page(title=title)
         last_revision = None
     last_content = None if last_revision is None else last_revision.content
@@ -78,6 +85,9 @@ def page_history(request, title):
     try:
         page = Page.objects.get(title=title)
     except Page.DoesNotExist:
+        page_list = Page.objects.filter(title__iexact=title).all()
+        if len(page_list) != 0:
+            return redirect("wiki_history", title=page_list[0].title )
         raise Http404()
 
     if not page.user_may_view(request.user):
