@@ -13,7 +13,7 @@ archive_options = dict(
     date_field = 'pub_date',
     context_object_name = 'posts',
     paginate_by = 10,
-    allow_empty = False
+    allow_empty = True
 )
 
 
