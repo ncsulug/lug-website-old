@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from django.utils.html import escape
-from .models import BlogPost
+from .models import BlogPost, BlogTag
 
 class BlogPostAdmin(admin.ModelAdmin):
     date_hierarchy = 'pub_date'
-    fields = ('title', 'slug', 'content', 'is_active', 'pub_date', 'author')
+    fields = ('title', 'slug', 'content', 'is_active', 'pub_date', 'author', 'tags')
     list_display = ('title', 'is_active', 'pub_date', 'author')
     list_filter = ('is_active', 'author')
     ordering = ('-pub_date',)
@@ -19,3 +19,5 @@ class BlogPostAdmin(admin.ModelAdmin):
 
 
 admin.site.register(BlogPost, BlogPostAdmin)
+admin.site.register(BlogTag)
+
