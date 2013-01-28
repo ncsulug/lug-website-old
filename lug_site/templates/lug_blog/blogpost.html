@@ -8,6 +8,11 @@
         at <time datetime="{{ post.pub_date|date:"c" }}">
             {{ post.pub_date|date:"P, l, F j, Y " }}
         </time>
+        {% if post.tags.all %}
+            tagged with {% for tag in post.tags.all %}
+            <a href="{% url blog_tags slug=tag.name %}">{{tag}}</a> 
+            {% endfor %}
+        {% endif %}
     </p>
 
     {{ post.content|wikitext }}
