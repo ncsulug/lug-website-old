@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from creoleparser.core import Parser
 from creoleparser.dialects import create_dialect, creole11_base, parse_args
-from creoleparser.elements import PreBlock
+from creoleparser.elements import PreBlock, Table as BaseTable
 from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
 from genshi import builder, Markup
@@ -54,6 +54,16 @@ def get_pygments_formatter():
     return global_cache['formatter']
 
 
+class Table(BaseTable):
+    def __init__(self, classes):
+        self.classes = classes
+        super(Table, self).__init__('table', '|')
+
+    def _build(self, mo, element_store, environ):
+        return super(Table, self)._build(mo, element_store, environ) \
+                                        (class_=self.classes)
+
+
 class CodeBlock(PreBlock):
     # Code borrowed from Flask Website:
     # https://github.com/mitsuhiko/flask/blob/website/flask_website/utils.py
@@ -93,6 +103,7 @@ def create_lug_dialect():
         interwiki_links_space_chars = iw_spaces
     )
     dialect.pre = CodeBlock()
+    dialect.table = Table('table table-striped table-bordered')
     return dialect
 
 
