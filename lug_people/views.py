@@ -45,20 +45,21 @@ class RegisterView(FormView):
 
     def form_valid(self, form):
         data = form.cleaned_data
-
         username = MemberProfile.make_username(data['nickname'])
-        user = User.objects.create_user(username, data['email'], data['password1'])
-        user.is_active = False
-        user.is_staff = False
-        user.save()
 
-        profile = form.save(commit=False)
-        profile.user = user
-        profile.save()
+        if '<a href' not in data['comments']:
+            user = User.objects.create_user(username, data['email'], data['password1'])
+            user.is_active = False
+            user.is_staff = False
+            user.save()
 
-        account_request = AccountRequest(user=user, status=u"pending",
-                                         comments=data['comments'])
-        account_request.save()
+            profile = form.save(commit=False)
+            profile.user = user
+            profile.save()
+
+            account_request = AccountRequest(user=user, status=u"pending",
+                                             comments=data['comments'])
+            account_request.save()
 
         messages.success(self.request, u"You have registered for an account! "
                          "We will contact you when your account has been "
