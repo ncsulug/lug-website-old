@@ -32,8 +32,6 @@ def view_page(request, title, revision_id=None):
 
     if request.GET.get("raw", ""):
         response = HttpResponse(mimetype='text/plain')
-        response['Content-Disposition'] = ('attachment; filename=%s.txt' %
-                                           quote(title.encode('utf-8')))
         response.write(revision.content)
         return response
 
