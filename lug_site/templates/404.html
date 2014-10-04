@@ -1,1 +1,21 @@
-<h1>404 - Not Found</h1>
+{% extends "layout_base.html" %}
+
+{% block title %}404 Not Found{% endblock title %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="span10 offset1">
+            <div class="hero-unit">
+                <h2>404 &mdash; Not Found</h2>
+
+                <p>
+                    Sorry. :-(<br>
+                    If you were sent here from a page on our site,<br>
+                    let us know where the broken link is.
+                </p>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}

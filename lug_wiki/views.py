@@ -2,8 +2,7 @@
 from .forms import EditForm
 from .models import Page, Revision
 from django.core.urlresolvers import reverse
-from django.http import (HttpResponse, HttpResponseRedirect,
-                         HttpResponseForbidden, Http404)
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, redirect
 
 def view_page(request, title, revision_id=None):
@@ -28,7 +27,7 @@ def view_page(request, title, revision_id=None):
         revision = page.latest_revision
 
     if not page.user_may_view(request.user):
-        return HttpResponseForbidden()
+        raise Http404()
 
     if request.GET.get("raw", ""):
         response = HttpResponse(mimetype='text/plain')

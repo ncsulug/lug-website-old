@@ -1,1 +1,21 @@
-<h1>500 - Server Error</h1>
+{% extends "layout_base.html" %}
+
+{% block title %}500 Internal Server Error{% endblock title %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="span10 offset1">
+            <div class="hero-unit">
+                <h2>500 &mdash; Internal Server Error</h2>
+
+                <p>
+                    Sorry. :-(<br>
+                    We just got sent an email with the error details,<br>
+                    so we'll put fixing it on our to-do list.
+                </p>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
