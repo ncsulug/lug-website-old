@@ -60,7 +60,7 @@ account_patterns = patterns('',
 
 urlpatterns = patterns('',
     # Profiles, hooray!
-    url(r'^~(?P<username>[a-zA-Z0-9@+.-]+)/$',
+    url(r'^~(?P<username>[a-zA-Z0-9_@+.-]+)/$',
         ProfileView.as_view(template_name='profiles/show.html'),
         name='profile'),
 
