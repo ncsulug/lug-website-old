@@ -36,7 +36,9 @@ def wiki_link_path(link):
         # User profile
         return reverse('profile', args=[MemberProfile.make_username(link[1:])])
     else:
-        return reverse('wiki_view', kwargs={'title': link})
+        # The only disallowed character is /.
+        # We turn it into - because it's most commonly used in dates.
+        return reverse('wiki_view', kwargs={'title': link.replace('/', '-')})
 
 
 def wiki_link_class(link):
