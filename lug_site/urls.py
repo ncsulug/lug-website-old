@@ -5,9 +5,6 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Blog views
-    url(r'^', include('lug_blog.urls')),
-
     # Wiki views
     url(r'^wiki/', include('lug_wiki.urls')),
 
@@ -16,4 +13,7 @@ urlpatterns = patterns('',
 
     # Admin interface and other internals
     url(r'^admin/', include(admin.site.urls)),
+
+    # Template index
+    url(r'^$', TemplateView.as_view(template_name='index.html'), name='index'),
 )
