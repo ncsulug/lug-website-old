@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from .models import MemberProfile, AccountRequest
+from .models import MemberProfile
 from .forms import ProfileEditForm, BitFormSet, RegistrationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -38,33 +38,6 @@ class ProfileView(DetailView):
             raise Http404()
         context = self.get_context_data(object=profile)
         return self.render_to_response(context)
-
-
-class RegisterView(FormView):
-    form_class = RegistrationForm
-
-    def form_valid(self, form):
-        data = form.cleaned_data
-        username = MemberProfile.make_username(data['nickname'])
-
-        if '<a href' not in data['comments']:
-            user = User.objects.create_user(username, data['email'], data['password1'])
-            user.is_active = False
-            user.is_staff = False
-            user.save()
-
-            profile = form.save(commit=False)
-            profile.user = user
-            profile.save()
-
-            account_request = AccountRequest(user=user, status=u"pending",
-                                             comments=data['comments'])
-            account_request.save()
-
-        messages.success(self.request, u"You have registered for an account! "
-                         "We will contact you when your account has been "
-                         "approved. You can then log in as %s." % username)
-        return HttpResponseRedirect('/')
 
 
 class ProfileEditView(View, TemplateResponseMixin):
