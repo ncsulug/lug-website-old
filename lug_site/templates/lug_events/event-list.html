@@ -1,0 +1,57 @@
+{% extends "layout_base.html" %}
+
+{% block title %}Events{% endblock title %}
+
+{% block body %}
+
+    <h1 class="page-header">
+        LUG Event Schedule
+    </h1>
+
+    {% regroup events by semester as semester_events %}
+
+    <table class="table">
+        {% for semester in semester_events %}
+            <tr>
+                <th colspan="3"><h2>{{ semester.grouper }}</h2>
+            </tr>
+
+            <tr>
+                <th>Date</th>
+                <th>Topic</th>
+                <th>Time &amp; Location</th>
+            </tr>
+
+            {% for event in semester.list %}
+                <tr>
+                    <td>
+                        {{ event.start_time|date:"l, M j" }}
+                    </td>
+                    <td>
+                        <strong>
+                            {% if event.has_link %}
+                                <a href="{{ event.get_absolute_url }}">{{ event.name }}</a>
+                            {% else %}
+                                {{ event.name }}
+                            {% endif %}
+                        </strong>
+                        <br>
+                        {% if event.speaker %}{{ event.speaker }}{% endif %}
+                        <em>({{ event.kind.singular }})</em>
+                        {% if event.advisory %}
+                            <br>
+                            <i class="icon-warning-sign"></i>
+                            <strong>{{ event.advisory }}</strong>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ event.start_time|date:"g:i A" }}&ndash;{% if event.start_time|date:"Y/m/d" != event.end_time|date:"Y/m/d" %}{{ event.end_time|date:"D g:i A" }}{% else %}{{ event.end_time|date:"g:i A" }}{% endif %}
+                        <br>
+                        {{ event.location }}
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+    </table>
+
+{% endblock body %}

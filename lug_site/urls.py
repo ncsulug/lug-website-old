@@ -8,6 +8,9 @@ urlpatterns = patterns('',
     # Wiki views
     url(r'^wiki/', include('lug_wiki.urls')),
 
+    # Events views
+    url(r'^events/', include('lug_events.urls')),
+
     # Profile and account views
     url(r'^', include('lug_people.urls')),
 

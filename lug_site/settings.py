@@ -134,6 +134,7 @@ INSTALLED_APPS = (
     'lug_markup',
     'lug_twitter',
     'lug_wiki',
+    'lug_events',
     'lug_fortune',
 )
 
